@@ -88,11 +88,13 @@ def get_model():
     model = Sequential([
         Conv2D(64, (3, 3), activation='relu', input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)),
         MaxPooling2D(pool_size=(2, 2)),
+        
+        Conv2D(64, (3, 3), activation='relu'),
 
         Flatten(),
 
-        Dense(128, activation='relu'),
-        Dropout(0.5),
+        Dense(256, activation='relu'),
+        Dropout(0.4),
 
         Dense(NUM_CATEGORIES, activation='softmax')
     ])
@@ -100,7 +102,7 @@ def get_model():
     # Train neural network
     model.compile(
         optimizer='adam',
-        loss='categoriacal_crossentropy',
+        loss='categorical_crossentropy',
         metrics=['accuracy']
     )
 

@@ -91,7 +91,10 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-
+    # Checking if source and target are the same person, if so return an empty list.
+    if source == target:
+        return []
+    
     # Initializing a source Node using as state the unique id, and a QueueFrontier.
     source_node = Node(source, None, None)
     
@@ -109,7 +112,7 @@ def shortest_path(source, target):
         
         # Removing node from frontier and adding it to the explored set.
         current_person = frontier.remove()
-        explored.add(current_person)
+        explored.add(current_person.state)
         
         for action, state in neighbors_for_person(current_person.state):
             # Checking if this person's id is the target's id.
@@ -128,8 +131,6 @@ def shortest_path(source, target):
             # Checking if related actors are already explored or currently waiting to be explored, if not adding the to the frontier.
             if state not in explored and not frontier.contains_state(state):
                 frontier.add(Node(state, current_person, action))
-    
-    return None
 
 
 def person_id_for_name(name):
